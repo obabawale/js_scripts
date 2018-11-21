@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function(){
+                document.querySelector("#digitalForm").onsubmit = function (){
+                    let formEntry = getFormEntry();
+                    let returnVal = digital_root(formEntry);
+                    document.querySelector("div").innerHTML = returnVal;
+                    clearForm();
+                    return false;
+                };
+            });
+
+            function digital_root(n){
+                nToString = typeof n === 'string'? n : String(n);
+                if ((nToString.length) === 1){
+                    return Number(n);
+                }else{
+                    let sumOfDigits = 0;
+                    while (nToString.length > 1){
+                        console.log("Length ", nToString.legnth);
+                        for (let letter of nToString){
+                            sumOfDigits += Number(letter); 
+                        }
+                        nToString = String(sumOfDigits);
+                        sumOfDigits = 0;
+                    }
+                    return Number(nToString);
+                }
+            }
+
+            function clearForm(){
+                let inputForm = document.querySelector("#entry");
+                inputForm.value = ''; 
+            }
+
+            function getFormEntry() {
+                return document.querySelector('#entry').value;
+            }
+
+        </script>
+     
+    </head>
+    <body>
+        <form id="digitalForm">
+            <input type="text" id="entry" placeholder="Enter a number here" name="Test"/>
+            <input type="submit" id="submitButton" value="Go!"/>
+            <div></div>
+        </form>
+    </body>
+</html>
